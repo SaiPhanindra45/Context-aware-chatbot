@@ -42,6 +42,7 @@ hr {
 }
 
 img {
-  max-width: 100%;
-  margin-bottom: 24px;
+  max-width: 60%;
+  height: 30vh;
+  margin-bottom: 10px;
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import Loader from './loader'
 function Summary({ file }) {
+    console.log(file)
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,16 +18,16 @@ function Summary({ file }) {
         setLoading(true);
         setError(null);
         
-        // Debug: Check if API key is available
+        
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
         console.log("API Key available:", !!apiKey);
         console.log("API Key length:", apiKey?.length || 0);
         
         if (!apiKey) {
-          throw new Error("API Key not found. Make sure VITE_GEMINI_API_KEY is set in your .env file");
+          throw new Error("API Key not found.");
         }
 
-        // Initialize the AI client
+    
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({model: "gemini-2.5-flash"});
         
@@ -53,12 +54,14 @@ function Summary({ file }) {
     getSummary();
   }, [file]);
 
-  if (loading) return <div>Generating summary...</div>;
+  if (loading) return <div>Generating summary <Loader /></div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
   
   return (
     <div>
+        <img className="preview-image" src={file.imageUrl} alt="Preview Image" />
       <h2>Document Summary</h2>
+      
       <p>{summary}</p>
     </div>
   );
