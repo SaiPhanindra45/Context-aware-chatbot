@@ -8,8 +8,10 @@ function FileUpload({setFile}) {
     const file ={
         type: event.target.files[0].type,
         file: Buffer.from(fileUpload).toString("base64"),
-        imageUrl: URL.createObjectURL(event.target.files[0])
+        imageUrl: event.target.files[0].type.includes("pdf") ? "/document-icon.png" : URL.createObjectURL(event.target.files[0])
+
     }
+    console.log(file);
     setFile(file);
 }
 

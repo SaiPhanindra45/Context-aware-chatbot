@@ -4,7 +4,7 @@ import Loader from './loader'
 function Summary({ file }) {
     console.log(file)
   const [summary, setSummary] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,8 +20,7 @@ function Summary({ file }) {
         
         
         const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        console.log("API Key available:", !!apiKey);
-        console.log("API Key length:", apiKey?.length || 0);
+       
         
         if (!apiKey) {
           throw new Error("API Key not found.");
@@ -38,7 +37,7 @@ function Summary({ file }) {
               data: file.file,
             },
           },
-          'Summarize the above content in a few short sentences.',
+          'Summarize the above content in a few short sentences. It can be below 300 words',
         ]);
        
         const text = result.response.text();
@@ -61,8 +60,8 @@ function Summary({ file }) {
     <div>
         <img className="preview-image" src={file.imageUrl} alt="Preview Image" />
       <h2>Document Summary</h2>
+      <div className="summary-box">{summary}</div>
       
-      <p>{summary}</p>
     </div>
   );
 }
