@@ -19,7 +19,7 @@ function Summary({ file }) {
         setError(null);
         
         
-        const apiKey = import.meta.GEMINI_API_KEY;
+        const apiKey = import.meta.env.VITE_APP_GEMINI_API_KEY;
        
         
         if (!apiKey) {
