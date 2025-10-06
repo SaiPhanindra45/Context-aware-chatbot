@@ -14,11 +14,9 @@ function Chat({file}) {
             setMessages(chatMessages);
 
             try {
-                // Log the file object to see its structure
                 console.log("File object:", file);
                 console.log("File keys:", Object.keys(file));
                 
-                // Check if file exists and has required properties
                 if (!file || !file.file || !file.type) {
                     throw new Error("File data is missing or incomplete");
                 }
@@ -63,7 +61,6 @@ Current question: ${userInput}`,
         }
     }
 
-    // Add a safety check before rendering
     if (!file) {
         return (
             <section className="chat-window">
