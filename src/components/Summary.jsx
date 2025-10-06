@@ -20,7 +20,7 @@ function Summary({ file }) {
         
         
         const apiKey = import.meta.env.VITE_APP_GEMINI_API_KEY;
-       
+        console.log("API Key exists:", !!apiKey);
         
         if (!apiKey) {
           throw new Error("API Key not found.");
